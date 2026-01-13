@@ -26,7 +26,6 @@
             --border: #E3E5E8;
             --danger: #ED4245;
             --gold: #F1C40F;
-            --success: #57F287;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; outline: none; -webkit-tap-highlight-color: transparent; }
@@ -41,21 +40,12 @@
             display: flex; flex-direction: column; min-height: 100vh;
         }
 
-        .bg-deco {
-            position: fixed; width: 400px; height: 400px; border-radius: 50%;
-            background: rgba(88, 101, 242, 0.05); filter: blur(80px);
-            z-index: -1; pointer-events: none;
-        }
-
         /* --- LOGIN PAGE --- */
         #entry-overlay {
             position: fixed; inset: 0; background: var(--blurple); z-index: 60000;
             display: flex; align-items: center; justify-content: center; transition: 0.8s;
         }
-        .login-container { position: relative; width: 100%; max-width: 420px; }
-        .chibi-peek { position: absolute; top: -145px; left: 50%; transform: translateX(-50%); width: 180px; z-index: -1; animation: peekAnimLarge 4s ease-in-out infinite; }
-        @keyframes peekAnimLarge { 0%, 100% { transform: translateX(-50%) translateY(10px); } 50% { transform: translateX(-50%) translateY(0px); } }
-        .login-card { position: relative; background: var(--bg-white); padding: 40px 32px; border-radius: 16px; box-shadow: 0 20px 40px rgba(0,0,0,0.2); text-align: center; }
+        .login-card { position: relative; background: var(--bg-white); padding: 40px 32px; border-radius: 16px; box-shadow: 0 20px 40px rgba(0,0,0,0.2); text-align: center; width: 90%; max-width: 400px; }
         .input-box { width: 100%; padding: 14px; background: #EBEDEF; border: none; border-radius: 6px; margin-bottom: 16px; font-weight: 600; }
         .btn-blurple { width: 100%; padding: 14px; background: var(--blurple); color: white; border: none; border-radius: 6px; font-weight: 700; cursor: pointer; transition: 0.2s; }
 
@@ -67,105 +57,72 @@
             backdrop-filter: blur(15px); border-bottom: 1px solid var(--border); display: flex; 
             align-items: center; padding: 0 5%; z-index: 1000; gap: 15px;
         }
-        nav::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: linear-gradient(90deg, var(--blurple), #a5b4fc); }
 
-        .search-container { flex: 1; display: flex; justify-content: flex-start; }
+        .search-container { flex: 1; }
         .search-container input { 
-            width: 100%; max-width: 800px; padding: 12px 20px; 
+            width: 100%; max-width: 500px; padding: 12px 20px; 
             background: rgba(242, 243, 245, 0.8); border: 2px solid transparent; 
-            border-radius: 12px; font-weight: 600; transition: 0.3s;
+            border-radius: 12px; font-weight: 600;
         }
-        .search-container input:focus { border-color: var(--blurple); background: white; box-shadow: 0 0 15px rgba(88, 101, 242, 0.1); }
+        .search-container input:focus { border-color: var(--blurple); background: white; }
         
         .user-section { font-size: 11px; font-weight: 800; color: var(--blurple); background: white; padding: 8px 16px; border-radius: 20px; cursor: pointer; display: flex; gap: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
 
         .tabs-container { width: 90%; max-width: 1200px; margin: 10px auto; display: flex; gap: 20px; border-bottom: 2px solid var(--border); }
-        .tab-item { padding: 10px 5px; cursor: pointer; font-weight: 700; color: var(--text-muted); border-bottom: 3px solid transparent; transition: 0.3s; position: relative; }
+        .tab-item { padding: 10px 5px; cursor: pointer; font-weight: 700; color: var(--text-muted); position: relative; }
         .tab-item.active { color: var(--blurple); }
-        .tab-item.active::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 100%; height: 3px; background: var(--blurple); border-radius: 10px; }
+        .tab-item.active::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 100%; height: 3px; background: var(--blurple); }
 
-        .slider-container {
-            width: 90%; max-width: 1200px; margin: 20px auto; 
-            display: flex; overflow-x: auto; scroll-snap-type: x mandatory;
-            scroll-behavior: smooth; border-radius: 20px; gap: 12px; scrollbar-width: none;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-        .slide { min-width: 100%; scroll-snap-align: start; aspect-ratio: 16 / 7; overflow: hidden; }
-        .slide img { width: 100%; height: 100%; object-fit: cover; }
+        .brand-container { width: 90%; max-width: 1200px; margin: 25px auto 5px auto; }
+        .brand-title { font-size: 42px; font-weight: 800; color: var(--blurple); letter-spacing: -1.5px; }
 
-        .brand-container { width: 90%; max-width: 1200px; margin: 25px auto 5px auto; text-align: left; }
-        .brand-title { font-size: 42px; font-weight: 800; color: var(--blurple); line-height: 0.9; letter-spacing: -1.5px; text-shadow: 2px 2px 0px white; }
-
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 25px; padding: 25px 5%; }
+        /* --- GRID --- */
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 20px; padding: 20px 5%; }
         .manga-card { 
-            background: var(--bg-white); border-radius: 16px; overflow: hidden; 
-            border: 1px solid var(--border); transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
-            position: relative; opacity: 0; transform: translateY(20px);
+            background: var(--bg-white); border-radius: 12px; overflow: hidden; 
+            border: 1px solid var(--border); transition: 0.3s; position: relative;
+            opacity: 0; transform: translateY(10px);
         }
         .manga-card.visible { opacity: 1; transform: translateY(0); }
-        .manga-card:hover { transform: translateY(-8px); border-color: var(--blurple); box-shadow: 0 15px 30px rgba(88, 101, 242, 0.15); }
-        
-        .manga-card img { width: 100%; aspect-ratio: 1 / 1.4; object-fit: cover; border-bottom: 1px solid var(--border); cursor: pointer; }
-        .manga-card .info { padding: 12px 10px 5px 10px; font-size: 13px; font-weight: 800; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-align: center; }
-        .manga-card .last-read { font-size: 10px; color: var(--blurple); padding-bottom: 12px; text-align: center; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; }
+        .manga-card img { width: 100%; aspect-ratio: 1 / 1.5; object-fit: cover; cursor: pointer; }
+        .manga-card .info { padding: 10px; font-size: 13px; font-weight: 700; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-        .fav-badge { 
-            position: absolute; top: 10px; right: 10px; background: rgba(255,255,255,0.9); 
-            color: #ddd; padding: 7px; border-radius: 50%; font-size: 14px; z-index: 10; 
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1); transition: 0.3s; cursor: pointer;
-        }
-        .fav-badge.active { color: var(--gold); transform: scale(1.1); }
+        .fav-badge { position: absolute; top: 8px; right: 8px; background: white; padding: 5px; border-radius: 50%; font-size: 12px; cursor: pointer; z-index: 5; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+        .fav-badge.active { color: var(--gold); }
 
+        /* --- READER --- */
         #reader-view { position: fixed; inset: 0; background: #000; z-index: 70000; display: none; flex-direction: column; }
-        .reader-header { background: var(--bg-white); padding: 10px 5%; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 15px rgba(0,0,0,0.2); }
-        .reader-body { flex: 1; overflow-y: auto; display: flex; flex-direction: column; align-items: center; background: #0f0f0f; }
-        .reader-body img { width: 100%; max-width: 850px; display: block; }
-        
-        #chapter-select { padding: 8px 12px; border-radius: 10px; border: 1px solid var(--border); font-weight: 700; background: var(--bg-light); outline: none; }
+        .reader-header { background: white; padding: 10px 5%; display: flex; justify-content: space-between; align-items: center; }
+        .reader-body { flex: 1; overflow-y: auto; display: flex; flex-direction: column; align-items: center; }
+        .reader-body img { width: 100%; max-width: 800px; display: block; }
 
-        #toast { 
-            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(100px); 
-            background: #23272a; color: white; padding: 14px 28px; border-radius: 12px; 
-            font-weight: 700; font-size: 14px; z-index: 99999; transition: 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-        }
+        #toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%) translateY(100px); background: #333; color: white; padding: 12px 24px; border-radius: 8px; z-index: 99999; transition: 0.4s; }
         #toast.show { transform: translateX(-50%) translateY(0); }
 
-        footer { padding: 80px 0; text-align: center; border-top: 1px solid var(--border); margin-top: 60px; background: white; position: relative; }
-        .logo-bottom { color: var(--blurple); font-weight: 900; font-size: 32px; letter-spacing: -1px; }
-
         @media (max-width: 600px) {
-            .grid { grid-template-columns: repeat(2, 1fr); gap: 15px; padding: 15px; }
-            .brand-title { font-size: 32px; }
+            .grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+            .brand-title { font-size: 30px; }
         }
-        
-        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
     </style>
 </head>
 <body>
 
-    <div class="bg-deco" style="top: 10%; left: -10%;"></div>
     <div id="toast">Notifikasi</div>
 
     <div id="entry-overlay">
-        <div class="login-container">
-            <img src="https://c.termai.cc/i188/y7shy.jpg" class="chibi-peek">
-            <div class="login-card">
-                <h2 style="margin-bottom: 10px;">Selamat Datang!</h2>
-                <input type="email" id="email" class="input-box" placeholder="Email">
-                <input type="password" id="password" class="input-box" placeholder="Password">
-                <button class="btn-blurple" onclick="loginEmail()">Masuk Sekarang</button>
-                <button class="btn-blurple" style="background:#fff; color:#000; border:1px solid #ddd; margin-top:12px" onclick="loginGoogle()">
-                    <img src="https://www.gstatic.com/images/branding/product/1x/gsa_512dp.png" width="18" style="margin-right:10px; vertical-align:middle;"> Lanjutkan dengan Google
-                </button>
-            </div>
+        <div class="login-card">
+            <h2 style="margin-bottom: 20px;">KomikDesu Login</h2>
+            <input type="email" id="email" class="input-box" placeholder="Email">
+            <input type="password" id="password" class="input-box" placeholder="Password">
+            <button class="btn-blurple" onclick="loginEmail()">Masuk</button>
+            <button class="btn-blurple" style="background:#fff; color:#000; border:1px solid #ddd; margin-top:10px" onclick="loginGoogle()">Google Login</button>
         </div>
     </div>
 
     <main id="dashboard">
         <nav>
             <div class="search-container">
-                <input type="text" id="search-input" placeholder="Mau baca apa hari ini? (Enter untuk cari)" onkeyup="handleSearch(event)">
+                <input type="text" id="search-input" placeholder="Cari manga..." onkeyup="handleSearch(event)">
             </div>
             <div class="user-section">
                 <span id="user-display">USER</span>
@@ -173,40 +130,22 @@
             </div>
         </nav>
 
-        <div class="slider-container" id="main-slider">
-            <div class="slide"><img src="http://aliceecdn.vercel.app/file/9d5d5ba8a0.png"></div>
-            <div class="slide"><img src="https://n.uguu.se/KaKPXlbh.png"></div>
-        </div>
-
         <div class="brand-container">
-            <p style="color:var(--blurple); font-weight:800; font-size: 12px; text-transform: uppercase; margin-bottom: 5px; letter-spacing: 2px;">Terbaru di</p>
             <h1 class="brand-title">KomikDesu</h1>
             <div class="tabs-container">
                 <div class="tab-item active" id="tab-home" onclick="changeTab('home')">Beranda</div>
                 <div class="tab-item" id="tab-favorit" onclick="changeTab('favorit')">Favorit</div>
-                <div class="tab-item" id="tab-history" onclick="changeTab('history')">History</div>
             </div>
         </div>
 
         <div class="grid" id="main-grid"></div>
-
-        <footer>
-            <div class="logo-bottom">KomikDesu</div>
-            <p style="font-size: 12px; color: var(--text-muted); margin-top: 10px; font-weight: 600;">Handcrafted with ❤️ by KEV.SOFT &copy; 2026</p>
-        </footer>
     </main>
 
     <div id="reader-view">
         <div class="reader-header">
-            <div style="display: flex; flex-direction: column; gap: 4px;">
-                <div id="r-title" style="font-weight:800; font-size: 12px; color: var(--text-muted); max-width: 140px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">TITLE</div>
-                <select id="chapter-select" onchange="loadSpecificChapter(this.value)"></select>
-            </div>
-            <div style="display: flex; gap: 10px;">
-                <button onclick="prevChapter()" style="background:var(--bg-light); border:none; padding:10px 15px; border-radius:10px; cursor:pointer; font-weight:800;"><</button>
-                <button onclick="nextChapter()" style="background:var(--bg-light); border:none; padding:10px 15px; border-radius:10px; cursor:pointer; font-weight:800;">></button>
-                <button onclick="closeReader()" style="background:var(--danger); color:white; border:none; padding:10px 18px; border-radius:10px; cursor:pointer; font-weight:800;">Tutup</button>
-            </div>
+            <div id="r-title" style="font-weight:800; font-size:14px;">TITLE</div>
+            <select id="chapter-select" onchange="loadSpecificChapter(this.value)"></select>
+            <button onclick="closeReader()" style="background:var(--danger); color:white; border:none; padding:8px 15px; border-radius:5px; cursor:pointer;">Tutup</button>
         </div>
         <div class="reader-body" id="r-images"></div>
     </div>
@@ -216,13 +155,12 @@
         import { getAuth, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
         import { getDatabase, ref, set, onValue } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
+        // Konfigurasi Firebase
         const firebaseConfig = {
             apiKey: "AIzaSyD4sXX-UMpQU3-4wGEBqWSxSHQ7b2RTJ-M",
             authDomain: "kevsoft-de038.firebaseapp.com",
             projectId: "kevsoft-de038",
             databaseURL: "https://kevsoft-de038-default-rtdb.firebaseio.com",
-            storageBucket: "kevsoft-de038.firebasestorage.app",
-            messagingSenderId: "778701933552",
             appId: "1:778701933552:web:6c5816db2413a82afbab35"
         };
 
@@ -231,15 +169,14 @@
         const db = getDatabase(app);
         const provider = new GoogleAuthProvider();
         
-        // GANTI INI DENGAN URL WORKER CLOUDFLARE KAMU
-        const API = "https://api.mangadex.org"; 
+        // URL WORKER CLOUDFLARE KAMU
+        const API = "https://komikdesumoe.kev-host.workers.dev"; 
 
         let currentUser = null;
-        let userData = { favorites: [], history: [] };
+        let userData = { favorites: [] };
         let currentTab = 'home';
         let chapterList = [];
-        let currentChapterIndex = 0;
-        let activeManga = null;
+        let activeMangaId = null;
 
         function showToast(msg) {
             const t = document.getElementById('toast');
@@ -252,39 +189,23 @@
             if(user) {
                 currentUser = user;
                 document.getElementById('user-display').innerText = (user.displayName || user.email.split('@')[0]).toUpperCase();
-                document.getElementById('entry-overlay').style.opacity = '0';
-                setTimeout(() => {
-                    document.getElementById('entry-overlay').style.display = 'none';
-                    document.getElementById('dashboard').style.display = 'block';
-                    setTimeout(() => document.getElementById('dashboard').style.opacity = '1', 50);
-                }, 800);
+                document.getElementById('entry-overlay').style.display = 'none';
+                document.getElementById('dashboard').style.display = 'block';
+                setTimeout(() => document.getElementById('dashboard').style.opacity = '1', 50);
                 
                 onValue(ref(db, 'users/' + user.uid), (snap) => {
-                    userData = snap.exists() ? snap.val() : { favorites: [], history: [] };
-                    if(currentTab !== 'home') refreshGrid();
+                    userData = snap.exists() ? snap.val() : { favorites: [] };
+                    if(currentTab === 'favorit') refreshGrid();
                 });
                 fetchManga();
             }
         });
 
-        window.changeTab = (tab) => {
-            currentTab = tab;
-            document.querySelectorAll('.tab-item').forEach(t => t.classList.remove('active'));
-            document.getElementById('tab-' + tab).classList.add('active');
-            if(tab === 'home') fetchManga(); else refreshGrid();
-        };
-
-        function refreshGrid() {
-            const data = (currentTab === 'favorit') ? (userData.favorites || []) : (userData.history || []);
-            renderList(data);
-        }
-
         async function fetchManga(query = "") {
             const grid = document.getElementById('main-grid');
-            grid.innerHTML = Array(6).fill('<div style="height:280px; background:#e5e7eb; border-radius:16px; animation:pulse 1.5s infinite;"></div>').join('');
+            grid.innerHTML = "<p>Memuat...</p>";
             
             try {
-                // Tambahkan rating agar manga muncul semua
                 let url = query 
                     ? `${API}/manga?title=${encodeURIComponent(query)}&limit=24&includes[]=cover_art&contentRating[]=safe&contentRating[]=suggestive&availableTranslatedLanguage[]=id` 
                     : `${API}/manga?limit=24&availableTranslatedLanguage[]=id&includes[]=cover_art&contentRating[]=safe&contentRating[]=suggestive&order[followedCount]=desc`;
@@ -293,41 +214,37 @@
                 const json = await resp.json();
                 renderList(json.data);
             } catch (e) {
-                grid.innerHTML = "<div style='grid-column:1/-1; text-align:center;'>Gagal memuat. Silakan periksa koneksi atau gunakan Proxy Cloudflare.</div>";
+                grid.innerHTML = "<p>Gagal memuat manga. Pastikan Cloudflare Worker aktif.</p>";
             }
         }
 
         function renderList(data) {
             const grid = document.getElementById('main-grid');
-            grid.innerHTML = data && data.length ? "" : "<div style='grid-column:1/-1; text-align:center; padding:50px; color:#9ca3af; font-weight:600;'>Belum ada data.</div>";
+            grid.innerHTML = (data && data.length) ? "" : "<p>Tidak ada hasil.</p>";
             
             data.forEach((m, i) => {
                 const title = m.attributes.title.en || Object.values(m.attributes.title)[0] || "No Title";
                 const cov = m.relationships?.find(r => r.type === 'cover_art');
-                const coverFileName = cov?.attributes?.fileName;
-                const img = m.savedImg || (coverFileName ? `https://uploads.mangadex.org/covers/${m.id}/${coverFileName}.256.jpg` : 'https://via.placeholder.com/256x360?text=No+Cover');
-                
+                const img = `https://uploads.mangadex.org/covers/${m.id}/${cov?.attributes?.fileName}.256.jpg`;
                 const isFav = userData.favorites?.some(f => f.id === m.id);
-                const hist = userData.history?.find(h => h.id === m.id);
 
                 const card = document.createElement('div');
                 card.className = 'manga-card';
                 card.innerHTML = `
                     <div class="fav-badge ${isFav ? 'active' : ''}" onclick="toggleFav(event, '${m.id}', '${title.replace(/'/g,"")}', '${img}')">⭐</div>
-                    <img src="${img}" onclick="openComic('${m.id}', '${title.replace(/'/g,"")}', '${img}')" loading="lazy">
-                    <div class="info" title="${title}">${title}</div>
-                    ${hist && hist.lastChapter ? `<div class="last-read">Lanjut Ch. ${hist.lastChapter}</div>` : ''}
+                    <img src="${img}" onclick="openComic('${m.id}', '${title.replace(/'/g,"")}')">
+                    <div class="info">${title}</div>
                 `;
                 grid.appendChild(card);
                 setTimeout(() => card.classList.add('visible'), i * 50);
             });
         }
 
-        window.openComic = async (id, title, img) => {
-            activeManga = { id, title, img };
+        window.openComic = async (id, title) => {
+            activeMangaId = id;
             document.getElementById('reader-view').style.display = 'flex';
             document.getElementById('r-title').innerText = title;
-            document.getElementById('r-images').innerHTML = "<div style='color:white; padding:100px; text-align:center;'>Mencari Chapter...</div>";
+            document.getElementById('r-images').innerHTML = "<p style='color:white; margin-top:50px;'>Memuat Chapter...</p>";
 
             try {
                 const resp = await fetch(`${API}/manga/${id}/feed?translatedLanguage[]=id&order[chapter]=asc&limit=100&contentRating[]=safe&contentRating[]=suggestive`);
@@ -335,44 +252,25 @@
                 
                 if(json.data && json.data.length > 0) {
                     chapterList = json.data;
-                    const hist = userData.history?.find(h => h.id === id);
-                    currentChapterIndex = hist ? hist.lastIdx : 0;
-
                     const selector = document.getElementById('chapter-select');
                     selector.innerHTML = chapterList.map((c, i) => `<option value="${i}">Chapter ${c.attributes.chapter || '?'}</option>`).join('');
-                    selector.value = currentChapterIndex;
-                    loadChapter(currentChapterIndex);
+                    loadChapter(0);
                 } else {
-                    document.getElementById('r-images').innerHTML = "<div style='color:white; padding:100px; text-align:center;'>Chapter Indonesia belum tersedia untuk judul ini.</div>";
+                    document.getElementById('r-images').innerHTML = "<p style='color:white; margin-top:50px;'>Chapter Indonesia tidak ditemukan.</p>";
                 }
-            } catch(e) {
-                showToast("Gagal mengambil daftar chapter.");
-            }
+            } catch(e) { showToast("Gagal memuat chapter."); }
         };
 
         async function loadChapter(idx) {
             const body = document.getElementById('r-images');
-            body.innerHTML = "<div style='color:white; padding:50px;'>Memuat Halaman...</div>";
-            body.scrollTop = 0;
-
+            body.innerHTML = "<p style='color:white; margin-top:50px;'>Memuat Halaman...</p>";
             const chap = chapterList[idx];
-            updateHistory(activeManga, chap.attributes.chapter, idx);
 
             try {
                 const res = await fetch(`${API}/at-home/server/${chap.id}`);
                 const data = await res.json();
                 body.innerHTML = data.chapter.dataSaver.map(img => `<img src="${data.baseUrl}/data-saver/${data.chapter.hash}/${img}" loading="lazy">`).join('');
-            } catch(e) {
-                body.innerHTML = "<div style='color:white; padding:50px;'>Gagal memuat gambar. MangaDex mungkin memblokir akses langsung.</div>";
-            }
-        }
-
-        function updateHistory(m, ch, idx) {
-            if(!userData.history) userData.history = [];
-            userData.history = userData.history.filter(h => h.id !== m.id);
-            userData.history.unshift({ id: m.id, attributes: { title: { en: m.title } }, savedImg: m.img, lastChapter: ch, lastIdx: idx });
-            if(userData.history.length > 24) userData.history.pop();
-            saveData();
+            } catch(e) { body.innerHTML = "<p style='color:white;'>Gagal memuat gambar.</p>"; }
         }
 
         window.toggleFav = (e, id, title, img) => {
@@ -381,27 +279,26 @@
             const idx = userData.favorites.findIndex(f => f.id === id);
             if(idx > -1) {
                 userData.favorites.splice(idx, 1);
-                showToast("Dihapus dari Favorit");
             } else {
                 userData.favorites.push({id, attributes:{title:{en:title}}, savedImg: img});
-                showToast("Berhasil disimpan ke Favorit! ⭐");
             }
-            saveData();
-            if(currentTab === 'favorit') refreshGrid();
+            set(ref(db, 'users/' + currentUser.uid), userData);
+            showToast("Favorit diperbarui");
         };
 
-        const saveData = () => set(ref(db, 'users/' + currentUser.uid), userData);
-        window.loadSpecificChapter = (v) => { currentChapterIndex = parseInt(v); loadChapter(v); };
-        window.nextChapter = () => { if(currentChapterIndex < chapterList.length-1) { currentChapterIndex++; document.getElementById('chapter-select').value = currentChapterIndex; loadChapter(currentChapterIndex); } else showToast("Ini chapter terakhir!"); };
-        window.prevChapter = () => { if(currentChapterIndex > 0) { currentChapterIndex--; document.getElementById('chapter-select').value = currentChapterIndex; loadChapter(currentChapterIndex); } };
-        window.closeReader = () => { document.getElementById('reader-view').style.display = 'none'; if(currentTab !== 'home') refreshGrid(); };
+        window.changeTab = (tab) => {
+            currentTab = tab;
+            document.querySelectorAll('.tab-item').forEach(t => t.classList.remove('active'));
+            document.getElementById('tab-' + tab).classList.add('active');
+            if(tab === 'home') fetchManga(); else renderList(userData.favorites || []);
+        };
+
+        window.loadSpecificChapter = (v) => loadChapter(v);
+        window.closeReader = () => document.getElementById('reader-view').style.display = 'none';
         window.handleSearch = (e) => { if(e.key === 'Enter') fetchManga(e.target.value); };
-        window.loginEmail = () => signInWithEmailAndPassword(auth, document.getElementById('email').value, document.getElementById('password').value).catch(e => showToast("Error: " + e.message));
+        window.loginEmail = () => signInWithEmailAndPassword(auth, document.getElementById('email').value, document.getElementById('password').value).catch(e => showToast(e.message));
         window.loginGoogle = () => signInWithPopup(auth, provider);
         window.logout = () => signOut(auth).then(() => location.reload());
-
-        const manifest = { "name": "KomikDesu", "short_name": "KomikDesu", "start_url": "./", "display": "standalone", "background_color": "#F2F3F5", "theme_color": "#5865F2", "icons": [{"src": "https://c.termai.cc/i188/y7shy.jpg", "sizes": "512x512", "type": "image/jpeg"}] };
-        document.getElementById('pwa-manifest').setAttribute('href', 'data:application/json;base64,' + btoa(JSON.stringify(manifest)));
     </script>
 </body>
 </html>
